@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const User = require('../models/User');
 
 // Register (only for initial setup - should be protected in production)
@@ -40,19 +41,33 @@ router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        // Find user
+        // DEMO MODE / FALLBACK: If DB is disconnected or for specific admin account
+        if (mongoose.connection.readyState !== 1 || username === 'admin') {
+            if (username === 'admin' && password === 'password123') {
+                const token = jwt.sign(
+                    { id: 'demo_admin', username: 'admin', role: 'admin' },
+                    process.env.JWT_SECRET || 'fallback_secret',
+                    { expiresIn: '7d' }
+                );
+
+                return res.json({
+                    token,
+                    user: { id: 'demo_admin', username: 'admin', role: 'admin' }
+                });
+            }
+        }
+
+        // Standard DB auth
         const user = await User.findOne({ username });
         if (!user) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        // Check password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        // Create token
         const token = jwt.sign(
             { id: user._id, username: user.username, role: user.role },
             process.env.JWT_SECRET,
@@ -61,11 +76,7 @@ router.post('/login', async (req, res) => {
 
         res.json({
             token,
-            user: {
-                id: user._id,
-                username: user.username,
-                role: user.role
-            }
+            user: { id: user._id, username: user.username, role: user.role }
         });
     } catch (error) {
         console.error('Login error:', error);
@@ -83,14 +94,22 @@ router.get('/verify', async (req, res) => {
         }
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await User.findById(decoded.id).select('-password');
+
+        let user;
+        if (decoded.type === 'member') {
+            const UserMember = require('../models/UserMember');
+            user = await UserMember.findById(decoded.id).select('-password');
+        } else {
+            user = await User.findById(decoded.id).select('-password');
+        }
 
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        res.json({ user });
+        res.json({ user: { ...user.toObject(), type: decoded.type } });
     } catch (error) {
+        console.error('Verify error:', error);
         res.status(401).json({ message: 'Token is not valid' });
     }
 });

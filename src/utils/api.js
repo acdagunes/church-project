@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const api = axios.create({
     baseURL: API_BASE_URL,
@@ -41,6 +41,28 @@ export const authAPI = {
     login: (credentials) => api.post('/auth/login', credentials),
     register: (userData) => api.post('/auth/register', userData),
     verify: () => api.get('/auth/verify')
+};
+
+// Parish API
+export const parishAPI = {
+    register: (userData) => api.post('/parish/register', userData),
+    login: (credentials) => api.post('/parish/login', credentials),
+    getPendingMembers: () => api.get('/parish/members/pending'),
+    updateMemberStatus: (id, status) => api.put(`/parish/members/status/${id}`, { status }),
+    togglePresence: () => api.put('/parish/presence/toggle'),
+    getPresence: () => api.get('/parish/presence/status'),
+    getCommunalChat: () => api.get('/parish/chat/communal'),
+    sendMessage: (data) => api.post('/parish/chat/send', data),
+    bookService: (data) => api.post('/parish/appointments', data),
+    getMyBookings: () => api.get('/parish/appointments/me'),
+    getBusySlots: (date) => api.get(`/parish/appointments/busy/${date}`),
+    getAllMembers: () => api.get('/parish/members/all'),
+    getAllAppointments: () => api.get('/parish/appointments/all'),
+    updateAppointmentStatus: (id, status) => api.put(`/parish/appointments/status/${id}`, { status }),
+    updateAppointment: (id, data) => api.put(`/parish/appointments/${id}`, data),
+    updateMember: (id, data) => api.put(`/parish/members/${id}`, data),
+    resetMemberPassword: (id, password) => api.put(`/parish/members/${id}/password`, { password }),
+    deleteMember: (id) => api.delete(`/parish/members/${id}`)
 };
 
 export default api;

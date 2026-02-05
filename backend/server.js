@@ -1,21 +1,35 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const dotenv = require('dotenv');
+const path = require('path');
 
 dotenv.config();
 
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  credentials: true
+}));
 app.use(express.json());
-app.use('/uploads', express.static('uploads'));
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../dist')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/gallery', require('./routes/gallery'));
 app.use('/api/content', require('./routes/content'));
+app.use('/api/parish', require('./routes/parish'));
+
+// Catch-all route to serve the React app
+app.get('*', (req, res) => {
+  if (!req.path.startsWith('/api') && !req.path.startsWith('/uploads')) {
+    res.sendFile(path.join(__dirname, '../dist/index.html'));
+  }
+});
 
 // MongoDB Connection
 const connectDB = async () => {
@@ -36,8 +50,8 @@ connectDB();
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'ok', 
+  res.json({
+    status: 'ok',
     message: 'Church API Server is running',
     database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
   });

@@ -25,8 +25,9 @@
 
 .footer-subtitle {
     font-size: 1.1rem;
-    color: var(--secondary-light);
+    color: var(--secondary);
     margin-bottom: var(--spacing-sm);
+    opacity: 0.9;
 }
 
 .footer-text {
@@ -36,9 +37,9 @@
 
 .footer-bottom {
     padding-top: var(--spacing-lg);
-    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    border-top: 1px solid var(--border);
     text-align: center;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.4);
 }
 
 @media (max-width: 768px) {

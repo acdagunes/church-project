@@ -1,6 +1,6 @@
-# წმინდა გიორგის ტაძარი | St. George Church
+# ყოვლადწმინდა ღმრთისმშობლის ხარების მშენებარე ტაძარი | Annunciation Cathedral
 
-Full-stack web application for a church construction project with multilingual support (Georgian/English).
+Full-stack ვებ-აპლიკაცია ყოვლადწმინდა ღმრთისმშობლის ხარების მშენებარე ტაძრისთვის მრავალენოვანი მხარდაჭერით (ქართული/ინგლისური).
 
 ## 🚀 Tech Stack
 
@@ -119,8 +119,8 @@ Backend: http://localhost:5000
 - Smooth animations and transitions
 - Glassmorphism effects
 - Responsive design (mobile-first)
-- Custom typography (Inter + Playfair Display)
-- Hover effects and micro-interactions
+- Custom typography (Inter + Noto Serif/Sans Georgian)
+- Winter/Stone aesthetic matching the church's architectural rendering
 
 ## 🔐 API Endpoints
 
@@ -164,4 +164,4 @@ VITE_API_URL=https://your-api-domain.com
 
 ## 📝 License
 
-© 2026 St. George Church. All rights reserved.
+© 2026 ყოვლადწმინდა ღმრთისმშობლის ხარების მშენებარე ტაძარი. ყველა უფლება დაცულია.

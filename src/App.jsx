@@ -8,7 +8,9 @@ import About from './pages/About';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Admin from './pages/Admin';
+import ParishSpace from './pages/ParishSpace';
 import './index.css';
 
 function App() {
@@ -25,7 +27,9 @@ function App() {
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
                 <Route path="/admin" element={<Admin />} />
+                <Route path="/parish" element={<ParishSpace />} />
               </Routes>
             </main>
             <Footer />

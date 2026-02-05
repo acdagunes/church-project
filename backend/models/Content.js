@@ -6,31 +6,9 @@ const contentSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    title: {
+    value: {
         type: String,
         required: true
-    },
-    titleEn: {
-        type: String,
-        required: true
-    },
-    content: {
-        type: String,
-        required: true
-    },
-    contentEn: {
-        type: String,
-        required: true
-    },
-    type: {
-        type: String,
-        enum: ['about', 'history', 'contact', 'hero', 'other'],
-        default: 'other'
-    },
-    metadata: {
-        type: Map,
-        of: String,
-        default: {}
     }
 }, {
     timestamps: true

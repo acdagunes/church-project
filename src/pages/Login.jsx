@@ -8,7 +8,7 @@ const Login = () => {
     const [credentials, setCredentials] = useState({ username: '', password: '' });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const { login } = useAuth();
+    const { login, loginMember } = useAuth();
     const { t } = useLanguage();
     const navigate = useNavigate();
 
@@ -17,22 +17,37 @@ const Login = () => {
         setError('');
         setLoading(true);
 
-        const result = await login(credentials.username, credentials.password);
+        try {
+            // First try admin login
+            const adminResult = await login(credentials.username, credentials.password);
 
-        if (result.success) {
-            navigate('/admin');
-        } else {
-            setError(result.message);
+            if (adminResult.success) {
+                navigate('/admin');
+                return;
+            }
+
+            // If not admin, try member login
+            const memberResult = await loginMember(credentials.username, credentials.password);
+
+            if (memberResult.success) {
+                navigate('/parish');
+            } else {
+                setError(memberResult.message === 'Invalid credentials'
+                    ? t('არასწორი მონაცემები', 'Invalid credentials')
+                    : memberResult.message);
+            }
+        } catch (err) {
+            setError(t('შესვლა ვერ მოხერხდა', 'Login failed'));
+        } finally {
+            setLoading(false);
         }
-
-        setLoading(false);
     };
 
     return (
         <div className="login-page">
             <div className="login-container">
                 <div className="login-card">
-                    <h1 className="login-title">{t('ადმინისტრატორის შესვლა', 'Admin Login')}</h1>
+                    <h1 className="login-title">{t('შესვლა', 'Login')}</h1>
 
                     {error && (
                         <div className="error-message">

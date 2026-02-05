@@ -17,8 +17,8 @@ const Header = () => {
             <div className="container">
                 <div className="header-content">
                     <Link to="/" className="logo">
-                        <span className="logo-icon">⛪</span>
-                        <span className="logo-text">{t('წმინდა გიორგის ტაძარი', 'St. George Church')}</span>
+                        <img src="/church-icon.svg" alt="logo" className="logo-icon-svg" />
+                        <span className="logo-text">{t('ყოვლადწმინდა ღმრთისმშობლის ხარების მშენებარე ტაძარი', 'Annunciation Cathedral')}</span>
                     </Link>
 
                     <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
@@ -50,15 +50,13 @@ const Header = () => {
                         >
                             {t('კონტაქტი', 'Contact')}
                         </Link>
-                        {user && (
-                            <Link
-                                to="/admin"
-                                className={`nav-link ${isActive('/admin') ? 'active' : ''}`}
-                                onClick={() => setIsMenuOpen(false)}
-                            >
-                                {t('ადმინი', 'Admin')}
-                            </Link>
-                        )}
+                        <Link
+                            to="/parish"
+                            className={`nav-link parish-link-btn ${isActive('/parish') ? 'active' : ''}`}
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            {t('სამრევლო', 'Parish')}
+                        </Link>
                     </nav>
 
                     <div className="header-actions">
@@ -67,7 +65,7 @@ const Header = () => {
                         </button>
                         {user && (
                             <button className="btn-logout" onClick={logout}>
-                                {t('გასვლა', 'Logout')}
+                                {t('გასვლა', 'Logout')} <span className="btn-icon">🚪</span>
                             </button>
                         )}
                         <button

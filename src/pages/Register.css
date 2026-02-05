@@ -1,0 +1,123 @@
+.register-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
+.register-card {
+    background: var(--bg-card);
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.register-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.church-seal {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.register-header h1 {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.register-header p {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.register-form .form-group {
+    margin-bottom: 20px;
+}
+
+.register-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.register-form input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.register-form input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(184, 158, 101, 0.1);
+    outline: none;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.btn-block {
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+    margin-top: 20px;
+}
+
+.register-footer {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    font-size: 0.9rem;
+}
+
+.register-footer a {
+    color: var(--primary-color);
+    margin-left: 5px;
+    font-weight: 600;
+}
+
+.success-card {
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    background: rgba(255, 0, 0, 0.1);
+    color: #ff4444;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+    .register-card {
+        padding: 25px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}

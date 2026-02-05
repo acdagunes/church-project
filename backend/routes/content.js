@@ -1,11 +1,16 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const Content = require('../models/Content');
 const { authMiddleware } = require('../middleware/auth');
 
 // Get all content (public)
 router.get('/', async (req, res) => {
     try {
+        if (mongoose.connection.readyState !== 1) {
+            return res.json([]);
+        }
+
         const { type, key } = req.query;
         let query = {};
 
@@ -28,6 +33,9 @@ router.get('/', async (req, res) => {
 // Get single content by key (public)
 router.get('/:key', async (req, res) => {
     try {
+        if (mongoose.connection.readyState !== 1) {
+            return res.status(404).json({ message: 'Content not found (DB disconnected)' });
+        }
         const content = await Content.findOne({ key: req.params.key });
 
         if (!content) {
@@ -44,32 +52,15 @@ router.get('/:key', async (req, res) => {
 // Create or update content (protected)
 router.post('/', authMiddleware, async (req, res) => {
     try {
-        const { key, title, titleEn, content, contentEn, type, metadata } = req.body;
+        const { key, value } = req.body;
 
         let contentItem = await Content.findOne({ key });
 
         if (contentItem) {
-            // Update existing
-            contentItem.title = title;
-            contentItem.titleEn = titleEn;
-            contentItem.content = content;
-            contentItem.contentEn = contentEn;
-            contentItem.type = type;
-            if (metadata) contentItem.metadata = metadata;
-
+            contentItem.value = value;
             await contentItem.save();
         } else {
-            // Create new
-            contentItem = new Content({
-                key,
-                title,
-                titleEn,
-                content,
-                contentEn,
-                type,
-                metadata
-            });
-
+            contentItem = new Content({ key, value });
             await contentItem.save();
         }
 

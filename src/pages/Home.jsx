@@ -1,23 +1,39 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import { galleryAPI } from '../utils/api';
+import { galleryAPI, contentAPI } from '../utils/api';
+import mamaoImg from '../assets/mamao.jpeg';
+import buildVideo from '../assets/church-build-video.mp4';
 import './Home.css';
 
 const Home = () => {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [recentImages, setRecentImages] = useState([]);
+    const [pageContent, setPageContent] = useState({});
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        loadRecentImages();
+        loadData();
     }, []);
 
-    const loadRecentImages = async () => {
+    const loadData = async () => {
         try {
-            const response = await galleryAPI.getAll({ limit: 3 });
-            setRecentImages(response.data);
+            const [galleryResponse, contentResponse] = await Promise.all([
+                galleryAPI.getAll({ limit: 3 }),
+                contentAPI.getAll()
+            ]);
+
+            setRecentImages(galleryResponse.data);
+
+            const contentMap = {};
+            contentResponse.data.forEach(item => {
+                contentMap[item.key] = item.value;
+            });
+            setPageContent(contentMap);
         } catch (error) {
-            console.error('Failed to load images:', error);
+            console.error('Failed to load home data:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -28,12 +44,12 @@ const Home = () => {
                 <div className="hero-overlay"></div>
                 <div className="hero-content container">
                     <h1 className="hero-title fade-in">
-                        {t('წმინდა გიორგის ტაძარი', 'St. George Church')}
+                        {pageContent[`hero_title_${language}`] || t('ყოვლადწმინდა ღმრთისმშობლის ხარების მშენებარე ტაძარი', 'Church of the Annunciation of the Blessed Virgin Mary')}
                     </h1>
                     <p className="hero-subtitle fade-in">
-                        {t(
-                            'ღვთის სადიდებლად და ქართული სულიერების განმტკიცებისთვის',
-                            'For the glory of God and strengthening Georgian spirituality'
+                        {pageContent[`hero_subtitle_${language}`] || t(
+                            'მშვიდობის, სულიერებისა და ტრადიციის კერა',
+                            'A haven of peace, spirituality, and tradition'
                         )}
                     </p>
                     <div className="hero-buttons fade-in">
@@ -55,18 +71,21 @@ const Home = () => {
                 <div className="container">
                     <div className="about-preview">
                         <div className="about-image slide-in-left">
-                            <div className="image-placeholder">
-                                <span className="placeholder-icon">⛪</span>
-                            </div>
+                            <img src={mamaoImg} alt="დეკანოზი თომა ცეცხლაძე" className="rector-photo" />
                         </div>
                         <div className="about-content slide-in-right">
                             <h2 className="section-title">
                                 {t('ჩვენი მისია', 'Our Mission')}
                             </h2>
+                            <div className="decorative-divider"></div>
+                            <div className="rector-info">
+                                <span className="rector-name">{t('დეკანოზი თომა ცეცხლაძე', 'Archpriest Thoma Tsetskhladze')}</span>
+                                <span className="rector-role">{t('წინამძღვარი', 'Rector')}</span>
+                            </div>
                             <p>
-                                {t(
-                                    'წმინდა გიორგის ტაძრის მშენებლობა არის ქართული სულიერების და ტრადიციების განახლების სიმბოლო. ჩვენი მიზანია შევქმნათ სულიერი სივრცე, სადაც თაობები შეიკრიბებიან ლოცვისა და ღვთისმსახურებისთვის.',
-                                    'The construction of St. George Church is a symbol of renewal of Georgian spirituality and traditions. Our goal is to create a spiritual space where generations will gather for prayer and worship.'
+                                {pageContent[`mission_text_${language}`] || t(
+                                    'ყოვლადწმინდა ღმრთისმშობლის ხარების ტაძრის მშენებლობა არის სულიერი აღორძინების სიმბოლო. წინამძღვრის, დეკანოზ თომა ცეცხლაძის ლოცვა-კურთხევით, ჩვენი მიზანია შევქმნათ წმინდა სივრცე, სადაც მორწმუნეთა გულები ერთიანდება ლოცვასა და მადლიერებაში.',
+                                    'The construction of the Annunciation Cathedral is a symbol of spiritual rebirth. Under the blessing of our rector, Archpriest Thoma Tsetskhladze, our goal is to create a sacred space where the hearts of believers unite in prayer and gratitude.'
                                 )}
                             </p>
                             <Link to="/about" className="btn btn-outline">
@@ -77,17 +96,37 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* Foundation Video Section */}
+            <section className="foundation-video">
+                <video autoPlay loop muted playsInline className="video-background">
+                    <source src={buildVideo} type="video/mp4" />
+                </video>
+                <div className="video-overlay"></div>
+                <div className="container foundation-content">
+                    <div className="content-box fade-in">
+                        <h2 className="section-title light">{t('ჩვენი დასაწყისი', 'Our Beginning')}</h2>
+                        <p className="foundation-text">
+                            {t(
+                                'მშენებლობის პირველი დღეები — საძირკვლის ჩაყრა და მომავლის იმედი. აქ დაიწყო ყოვლადწმინდა ღმრთისმშობლის ხარების ტაძრის ისტორია.',
+                                'The first days of construction — laying the foundation and hope for the future. This is where the history of the Annunciation Cathedral began.'
+                            )}
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+
             {/* Construction Progress */}
             <section className="section section-dark">
                 <div className="container">
                     <h2 className="section-title">{t('მშენებლობის პროგრესი', 'Construction Progress')}</h2>
                     <div className="progress-stats">
                         <div className="stat-card">
-                            <div className="stat-number">75%</div>
+                            <div className="stat-number">{pageContent['construction_progress'] || 75}%</div>
                             <div className="stat-label">{t('დასრულებული', 'Completed')}</div>
                         </div>
                         <div className="stat-card">
-                            <div className="stat-number">2024</div>
+                            <div className="stat-number">{pageContent['completion_year'] || '2024'}</div>
                             <div className="stat-label">{t('დასრულების წელი', 'Completion Year')}</div>
                         </div>
                         <div className="stat-card">

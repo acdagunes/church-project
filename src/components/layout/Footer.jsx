@@ -11,12 +11,12 @@ const Footer = () => {
                 <div className="footer-content">
                     <div className="footer-section">
                         <h3 className="footer-title">
-                            {t('წმინდა გიორგის ტაძარი', 'St. George Church')}
+                            {t('ყოვლადწმინდა ღმრთისმშობლის ხარების მშენებარე ტაძარი', 'Annunciation Cathedral')}
                         </h3>
                         <p className="footer-text">
                             {t(
-                                'ღვთის სადიდებლად და ქართული სულიერების განმტკიცებისთვის',
-                                'For the glory of God and strengthening Georgian spirituality'
+                                'მშვიდობისა და სულიერების კერა',
+                                'A haven of peace and spirituality'
                             )}
                         </p>
                     </div>
@@ -40,7 +40,7 @@ const Footer = () => {
                 </div>
 
                 <div className="footer-bottom">
-                    <p>© {currentYear} {t('წმინდა გიორგის ტაძარი. ყველა უფლება დაცულია.', 'St. George Church. All rights reserved.')}</p>
+                    <p>© {currentYear} {t('ყოვლადწმინდა ღმრთისმშობლის ხარების ტაძარი. ყველა უფლება დაცულია.', 'Annunciation Cathedral. All rights reserved.')}</p>
                 </div>
             </div>
         </footer>

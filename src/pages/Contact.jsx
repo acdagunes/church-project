@@ -81,8 +81,8 @@ const Contact = () => {
                             <div className="bank-info">
                                 <h3>{t('საბანკო რეკვიზიტები', 'Bank Details')}</h3>
                                 <p>
-                                    {t('ბანკი:', 'Bank:')} TBC Bank<br />
-                                    {t('ანგარიში:', 'Account:')} GE00TB0000000000000000<br />
+                                    {t('ბანკი:', 'Bank:')} {t('საქართველოს ბანკი', 'Bank of Georgia')}<br />
+                                    {t('ანგარიში:', 'Account:')} GE18BG0000000131140121<br />
                                     {t('დანიშნულება:', 'Purpose:')} {t('შემოწირულობა ტაძრის მშენებლობისთვის', 'Donation for church construction')}
                                 </p>
                             </div>
