@@ -98,6 +98,9 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Fade into the Video section below which is darkish */}
+                <div className="cinematic-fade-bottom to-dark"></div>
             </section>
 
             {/* Foundation Video Section */}
@@ -130,6 +133,8 @@ const Home = () => {
 
             {/* Construction Progress */}
             <section className="section section-dark">
+                <div className="cinematic-fade-top from-dark"></div>
+
                 <div className="container">
                     <h2 className="section-title">{t('მშენებლობის პროგრესი', 'Construction Progress')}</h2>
                     <div className="progress-stats">
@@ -147,11 +152,15 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
+
+                <div className="cinematic-fade-bottom to-dark"></div>
             </section>
 
             {/* Recent Gallery */}
             {recentImages.length > 0 && (
                 <section className="section">
+                    <div className="cinematic-fade-top"></div>
+
                     <div className="container">
                         <h2 className="section-title">{t('ბოლო ფოტოები', 'Recent Photos')}</h2>
                         <div className="gallery-preview grid grid-3">
@@ -172,11 +181,15 @@ const Home = () => {
                             </Link>
                         </div>
                     </div>
+
+                    <div className="cinematic-fade-bottom to-dark"></div>
                 </section>
             )}
 
             {/* Call to Action */}
             <section className="section cta-section">
+                <div className="cinematic-fade-top from-dark"></div>
+
                 <div className="container">
                     <div className="cta-content">
                         <h2>{t('შეიტანეთ წვლილი', 'Contribute')}</h2>
