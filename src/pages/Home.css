@@ -61,11 +61,11 @@
 }
 
 .hero-title {
-    font-size: clamp(3.2rem, 7.5vw, 5.8rem);
-    margin-bottom: 2rem;
+    font-size: clamp(2.2rem, 8vw, 5.8rem);
+    margin-bottom: 1.5rem;
     font-weight: 900;
     letter-spacing: -0.01em;
-    line-height: 1.25;
+    line-height: 1.1;
     background: var(--gold-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -73,6 +73,7 @@
     filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5)) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
     animation: heroTitleReveal 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     position: relative;
+    padding: 0 0.5rem;
 }
 
 .hero-title::after {
@@ -136,7 +137,7 @@
 }
 
 .hero-scroll span {
-    font-size: 2rem;
+    font-size: 1.5rem;
     animation: float 2s ease-in-out infinite;
 }
 
@@ -247,9 +248,10 @@
 .about-content p::first-letter {
     float: left;
     font-family: var(--font-heading);
-    font-size: 4.5rem;
-    line-height: 1;
-    margin-right: 15px;
+    font-size: clamp(3rem, 15vw, 4.5rem);
+    line-height: 0.8;
+    margin-right: 12px;
+    margin-top: 5px;
     color: var(--gold-deep);
     font-weight: 800;
 }
@@ -452,20 +454,51 @@
 
 @media (max-width: 768px) {
     .hero {
-        height: 80vh;
+        height: 75vh;
+        min-height: 500px;
+        background-attachment: scroll;
     }
 
-    .about-preview {
-        grid-template-columns: 1fr;
+    .hero-subtitle {
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+        margin-bottom: 2.5rem;
     }
 
     .hero-buttons {
         flex-direction: column;
         align-items: center;
+        width: 100%;
+        padding: 0 1rem;
+        gap: 1rem;
     }
 
     .hero-buttons .btn {
         width: 100%;
-        max-width: 300px;
+        max-width: 100%;
+    }
+
+    .about-preview {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .about-content h2 {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+        text-align: center;
+    }
+
+    .decorative-divider {
+        background-position: center center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        height: 100vh;
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 10vw, 3.2rem);
     }
 }

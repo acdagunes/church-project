@@ -38,11 +38,11 @@
 
   /* Spacing */
   --spacing-xs: 0.5rem;
-  --spacing-sm: 1rem;
-  --spacing-md: 1.5rem;
-  --spacing-lg: 2rem;
-  --spacing-xl: 3.5rem;
-  --spacing-2xl: 6rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1.25rem;
+  --spacing-lg: 1.75rem;
+  --spacing-xl: 2.5rem;
+  --spacing-2xl: 4rem;
 
   /* Border Radius */
   --radius-sm: 4px;
@@ -149,6 +149,14 @@ a {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 var(--spacing-md);
+}
+
+@media (max-width: 480px) {
+
+  .container,
+  .container-wide {
+    padding: 0 var(--spacing-sm);
+  }
 }
 
 /* Buttons */
