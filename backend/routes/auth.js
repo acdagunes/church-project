@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const User = require('../models/User');
+const UserMember = require('../models/UserMember');
 
 // Register (only for initial setup - should be protected in production)
 router.post('/register', async (req, res) => {
@@ -44,15 +45,38 @@ router.post('/login', async (req, res) => {
 
         // MASTER ADMIN FALLBACK: Always works
         if (username === 'admin' && password === 'password123') {
+            // Ensure a real DB user exists for the admin (Rector) so bookings work
+            let adminMember = await UserMember.findOne({ username: 'admin' });
+
+            if (!adminMember) {
+                // Auto-create rector if missing
+                adminMember = new UserMember({
+                    username: 'admin',
+                    email: 'admin@geochurch.ge',
+                    password: await bcrypt.hash('password123', 10),
+                    fullName: 'დეკანოზი თომა',
+                    role: 'rector',
+                    status: 'approved',
+                    isAtChurch: true
+                });
+                await adminMember.save();
+                console.log('Admin/Rector account auto-created');
+            }
+
             const token = jwt.sign(
-                { id: 'master_admin', username: 'admin', role: 'admin' },
+                { id: adminMember._id, username: 'admin', role: 'rector', type: 'member' }, // Use 'rector' role
                 process.env.JWT_SECRET || 'fallback_secret',
                 { expiresIn: '7d' }
             );
 
             return res.json({
                 token,
-                user: { id: 'master_admin', username: 'admin', role: 'admin' }
+                user: {
+                    id: adminMember._id,
+                    username: 'admin',
+                    role: 'rector',
+                    fullName: adminMember.fullName
+                }
             });
         }
 
