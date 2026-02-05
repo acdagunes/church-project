@@ -96,5 +96,36 @@
 @media (max-width: 768px) {
     .contact-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+        padding: 0 1rem;
+    }
+
+    .contact-form-container {
+        padding: var(--spacing-lg);
+    }
+
+    .info-item {
+        padding: var(--spacing-sm);
+    }
+
+    .info-icon {
+        font-size: 1.5rem;
+    }
+
+    .bank-info {
+        padding: var(--spacing-md);
+    }
+
+    .bank-info p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .contact-info h2,
+    .contact-form-container h2 {
+        font-size: 1.5rem;
+        text-align: center;
     }
 }
