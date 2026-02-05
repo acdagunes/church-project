@@ -40,24 +40,27 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
+        console.log(`Login attempt for: ${username}`);
 
-        // DEMO MODE / FALLBACK: If DB is disconnected or for specific admin account
-        if (mongoose.connection.readyState !== 1 || username === 'admin') {
-            if (username === 'admin' && password === 'password123') {
-                const token = jwt.sign(
-                    { id: 'demo_admin', username: 'admin', role: 'admin' },
-                    process.env.JWT_SECRET || 'fallback_secret',
-                    { expiresIn: '7d' }
-                );
+        // MASTER ADMIN FALLBACK: Always works
+        if (username === 'admin' && password === 'password123') {
+            const token = jwt.sign(
+                { id: 'master_admin', username: 'admin', role: 'admin' },
+                process.env.JWT_SECRET || 'fallback_secret',
+                { expiresIn: '7d' }
+            );
 
-                return res.json({
-                    token,
-                    user: { id: 'demo_admin', username: 'admin', role: 'admin' }
-                });
-            }
+            return res.json({
+                token,
+                user: { id: 'master_admin', username: 'admin', role: 'admin' }
+            });
         }
 
         // Standard DB auth
+        if (mongoose.connection.readyState !== 1) {
+            console.error('Database not connected during login attempt');
+            return res.status(503).json({ message: 'Database connection error' });
+        }
         const user = await User.findOne({ username });
         if (!user) {
             return res.status(400).json({ message: 'Invalid credentials' });
