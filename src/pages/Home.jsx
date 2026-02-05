@@ -64,6 +64,13 @@ const Home = () => {
                 <div className="hero-scroll">
                     <span>↓</span>
                 </div>
+
+                {/* Transition Graphic */}
+                <div className="section-divider divider-bottom">
+                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5,73.84-4.36,147.54,16.88,218.2,35.26,69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113,1.11,1200,0H0Z" className="divider-fill-parchment"></path>
+                    </svg>
+                </div>
             </section>
 
             {/* About Preview */}
@@ -102,6 +109,14 @@ const Home = () => {
                     <source src={buildVideo} type="video/mp4" />
                 </video>
                 <div className="video-overlay"></div>
+
+                {/* Top Divider */}
+                <div className="section-divider divider-top" style={{ transform: 'rotate(180deg)' }}>
+                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5,73.84-4.36,147.54,16.88,218.2,35.26,69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113,1.11,1200,0H0Z" className="divider-fill-parchment"></path>
+                    </svg>
+                </div>
+
                 <div className="container foundation-content">
                     <div className="content-box fade-in">
                         <h2 className="section-title light">{t('ჩვენი დასაწყისი', 'Our Beginning')}</h2>
@@ -112,6 +127,13 @@ const Home = () => {
                             )}
                         </p>
                     </div>
+                </div>
+
+                {/* Bottom Divider */}
+                <div className="section-divider divider-bottom">
+                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5,73.84-4.36,147.54,16.88,218.2,35.26,69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113,1.11,1200,0H0Z" className="divider-fill-dark"></path>
+                    </svg>
                 </div>
             </section>
 

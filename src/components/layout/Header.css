@@ -9,6 +9,13 @@
     transition: all var(--transition-normal);
 }
 
+/* New spacing variables */
+:root {
+    --spacing-xl: 3.5rem;
+    --spacing-2xl: 6rem;
+    --spacing-3xl: 9rem;
+}
+
 .header-content {
     display: flex;
     align-items: center;
@@ -61,6 +68,13 @@
     display: flex;
     align-items: center;
     gap: 2rem;
+}
+
+.section {
+    padding: var(--spacing-3xl) 0;
+    position: relative;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll from inner animations */
 }
 
 .nav-link {
@@ -224,14 +238,48 @@
     transform: translateY(-2px);
 }
 
-.parish-link-btn.active {
-    background: var(--primary) !important;
-    color: white !important;
+/* Section Dividers */
+.section-divider {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 5;
+    pointer-events: none;
 }
 
-.parish-link-btn::after {
-    display: none !important;
-    /* Remove the underline animation for the button */
+.divider-top {
+    top: -1px;
+}
+
+.divider-bottom {
+    bottom: -1px;
+}
+
+.divider-fill-parchment {
+    fill: var(--parchment-bg);
+}
+
+.divider-fill-white {
+    fill: white;
+}
+
+.divider-fill-dark {
+    fill: var(--primary-dark);
+}
+
+.divider-fill-primary {
+    fill: var(--primary);
+}
+
+@media (max-width: 768px) {
+    .section-divider {
+        height: 50px;
+    }
+}
+
+display: none !important;
+/* Remove the underline animation for the button */
 }
 
 @media (max-width: 768px) {
