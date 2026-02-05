@@ -146,7 +146,7 @@ const Home = () => {
                             {recentImages.map((item, index) => (
                                 <div key={item._id} className="gallery-card fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                                     <div className="gallery-image">
-                                        <img src={`http://localhost:5000${item.imageUrl}`} alt={item.title} />
+                                        <img src={`${import.meta.env.VITE_API_URL || ''}${item.imageUrl}`} alt={item.title} />
                                         <div className="gallery-overlay">
                                             <h3>{item.title}</h3>
                                         </div>
