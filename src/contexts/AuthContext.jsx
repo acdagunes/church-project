@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { authAPI, parishAPI } from '../utils/api';
 
 const AuthContext = createContext();
 
@@ -26,9 +27,7 @@ export const AuthProvider = ({ children }) => {
 
     const verifyToken = async (token) => {
         try {
-            const response = await axios.get('/api/auth/verify', {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+            const response = await authAPI.verify();
             setUser(response.data.user);
         } catch (error) {
             localStorage.removeItem('token');
@@ -39,10 +38,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (username, password) => {
         try {
-            const response = await axios.post('/api/auth/login', {
-                username,
-                password
-            });
+            const response = await authAPI.login({ username, password });
             localStorage.setItem('token', response.data.token);
             setUser(response.data.user);
             return { success: true, role: response.data.user.role };
@@ -56,10 +52,7 @@ export const AuthProvider = ({ children }) => {
 
     const loginMember = async (username, password) => {
         try {
-            const response = await axios.post('/api/parish/login', {
-                username,
-                password
-            });
+            const response = await parishAPI.login({ username, password });
             localStorage.setItem('token', response.data.token);
             const userData = { ...response.data.member, type: 'member' };
             setUser(userData);

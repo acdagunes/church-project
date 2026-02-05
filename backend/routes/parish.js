@@ -7,6 +7,8 @@ const Message = require('../models/Message');
 const Appointment = require('../models/Appointment');
 const { authMiddleware, adminMiddleware } = require('../middleware/auth');
 
+const parish = require('../routes/parish');
+
 // Register a new member
 router.post('/register', async (req, res) => {
     try {
@@ -29,7 +31,7 @@ router.post('/register', async (req, res) => {
         await member.save();
         res.status(201).json({ message: 'Registration successful. Waiting for admin approval.' });
     } catch (error) {
-        console.error('REGISTRATION ERROR FULL:', error);
+        console.error('REGISTRATION ERROR:', error);
         res.status(500).json({
             message: 'Server error during registration',
             error: error.message
@@ -45,26 +47,21 @@ router.post('/login', async (req, res) => {
 
         const member = await UserMember.findOne({ username });
         if (!member) {
-            console.log('User not found in DB:', username);
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        console.log('Member status:', member.status);
         if (member.status !== 'approved' && member.role !== 'rector') {
-            console.log('Access denied: status is', member.status);
             return res.status(403).json({ message: 'Account is pending approval or blocked' });
         }
 
         const isMatch = await bcrypt.compare(password, member.password);
-        console.log('Bcrypt comparison result:', isMatch);
-
         if (!isMatch) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
         const token = jwt.sign(
             { id: member._id, username: member.username, role: member.role, type: 'member' },
-            process.env.JWT_SECRET,
+            process.env.JWT_SECRET || 'fallback_secret',
             { expiresIn: '7d' }
         );
 
