@@ -289,13 +289,17 @@
 }
 
 /* Foundation Video Section Styling */
-display: flex;
-align-items: center;
-justify-content: center;
-overflow: hidden;
-color: white;
-background: var(--bg-dark);
-/* Ensure no gap color */
+.foundation-video {
+    position: relative;
+    height: 60vh;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: white;
+    background: var(--bg-dark);
+    /* Ensure no gap color */
 }
 
 .video-background {
