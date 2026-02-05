@@ -219,28 +219,30 @@
 
 /* Parish CTA Button In Header */
 .parish-link-btn {
-    color: var(--primary) !important;
-    font-weight: 700 !important;
-    border: 2px solid var(--primary) !important;
-    padding: 0.5rem 1.2rem !important;
-    border-radius: 50px !important;
+    color: var(--primary);
+    font-weight: 700;
+    border: 2px solid var(--primary);
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
     margin-left: 1rem;
-    transition: all 0.3s ease !important;
+    transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
     background: transparent;
+    text-decoration: none;
+    /* Ensure no underline from parent links */
 }
 
-@media (max-width: 768px) {
-    .parish-link-btn {
-        margin: 10px 0;
-        justify-content: center;
-        width: 100%;
-    }
+.parish-link-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 90, 106, 0.2);
 }
 
-display: none !important;
-/* Remove the underline animation for the button */
+/* Specific overwrite for underline effect */
+.nav-link.parish-link-btn::after {
+    display: none;
 }
 
 @media (max-width: 768px) {

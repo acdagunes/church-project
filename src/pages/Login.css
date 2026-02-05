@@ -44,3 +44,10 @@
     width: 100%;
     margin-top: var(--spacing-md);
 }
+
+.login-form input {
+    cursor: text;
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+}
