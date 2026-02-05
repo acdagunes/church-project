@@ -210,6 +210,14 @@ a {
   box-shadow: var(--shadow-sm);
 }
 
+.rector-photo-frame {
+  flex: 1;
+  max-width: 48%;
+  /* More flexible than 200px */
+  border-width: 4px;
+  box-shadow: var(--shadow-md);
+}
+
 .btn-secondary:hover {
   transform: translateY(-2px);
   background: var(--bg-light);
@@ -267,6 +275,9 @@ a {
 /* Section */
 .section {
   padding: var(--spacing-2xl) 0;
+  position: relative;
+  overflow-x: hidden;
+  /* Prevent horizontal scroll from inner animations */
 }
 
 .section-dark {
