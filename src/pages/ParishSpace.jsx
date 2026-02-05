@@ -92,7 +92,9 @@ const ParishSpace = () => {
             alert(t('დაჯავშნა წარმატებით შესრულდა! მამაო განიხილავს თქვენს მოთხოვნას.', 'Booking successful! Father will review your request.'));
             fetchData();
         } catch (err) {
-            alert(err.response?.data?.message || t('დაჯავშნა ვერ მოხერხდა', 'Booking failed'));
+            const errorMessage = err.response?.data?.message || t('დაჯავშნა ვერ მოხერხდა', 'Booking failed');
+            const errorDetails = err.response?.data?.details ? `\n\nDetails: ${err.response.data.details}` : '';
+            alert(`${errorMessage}${errorDetails}`);
         }
     };
 
