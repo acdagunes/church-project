@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
     const verifyToken = async (token) => {
         try {
-            const response = await axios.get('http://localhost:5000/api/auth/verify', {
+            const response = await axios.get('/api/auth/verify', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setUser(response.data.user);
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (username, password) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/login', {
+            const response = await axios.post('/api/auth/login', {
                 username,
                 password
             });
@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) => {
 
     const loginMember = async (username, password) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/parish/login', {
+            const response = await axios.post('/api/parish/login', {
                 username,
                 password
             });

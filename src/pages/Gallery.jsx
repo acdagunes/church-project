@@ -73,7 +73,7 @@ const Gallery = () => {
                                 >
                                     <div className="gallery-item-image">
                                         <img
-                                            src={`http://localhost:5000${item.imageUrl}`}
+                                            src={`${import.meta.env.VITE_API_URL || ''}${item.imageUrl}`}
                                             alt={language === 'ka' ? item.title : item.titleEn}
                                         />
                                         <div className="gallery-item-overlay">

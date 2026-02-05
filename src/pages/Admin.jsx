@@ -368,7 +368,7 @@ const Admin = () => {
                             <div className="admin-gallery-grid">
                                 {images.map(item => (
                                     <div key={item._id} className="admin-gallery-item">
-                                        <img src={item.imageUrl.startsWith('http') ? item.imageUrl : `http://localhost:5000${item.imageUrl}`} alt={item.title} />
+                                        <img src={item.imageUrl.startsWith('http') ? item.imageUrl : `${import.meta.env.VITE_API_URL || ''}${item.imageUrl}`} alt={item.title} />
                                         <div className="admin-item-actions">
                                             <button className="btn-delete" onClick={() => handleDelete(item._id)}>
                                                 {t('წაშლა', 'Delete')}
