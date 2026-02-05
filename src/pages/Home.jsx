@@ -61,6 +61,9 @@ const Home = () => {
                         </Link>
                     </div>
                 </div>
+
+                <div className="cinematic-fade-bottom"></div>
+
                 <div className="hero-scroll">
                     <span>↓</span>
                 </div>

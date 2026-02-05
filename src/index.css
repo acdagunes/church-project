@@ -41,8 +41,9 @@
   --spacing-sm: 0.75rem;
   --spacing-md: 1.25rem;
   --spacing-lg: 1.75rem;
-  --spacing-xl: 2.5rem;
-  --spacing-2xl: 4rem;
+  --spacing-xl: 3.5rem;
+  --spacing-2xl: 6rem;
+  --spacing-3xl: 9rem;
 
   /* Border Radius */
   --radius-sm: 4px;
@@ -276,10 +277,66 @@ a {
 
 /* Section */
 .section {
-  padding: var(--spacing-2xl) 0;
+  padding: var(--spacing-3xl) 0;
   position: relative;
   overflow-x: hidden;
   /* Prevent horizontal scroll from inner animations */
+}
+
+/* Section Dividers & Cinematic Transitions */
+.section-divider {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  /* Taller for more gradual curve */
+  z-index: 10;
+  pointer-events: none;
+}
+
+.divider-top {
+  top: -2px;
+}
+
+.divider-bottom {
+  bottom: -2px;
+}
+
+.divider-fill-parchment {
+  fill: var(--parchment-bg);
+}
+
+.divider-fill-white {
+  fill: white;
+}
+
+.divider-fill-dark {
+  fill: var(--bg-dark);
+}
+
+.divider-fill-primary {
+  fill: var(--primary);
+}
+
+/* Cinematic Fade Utility */
+.cinematic-fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: linear-gradient(to bottom, transparent, var(--parchment-bg));
+  z-index: 4;
+}
+
+.divider-dark-fade .cinematic-fade-bottom {
+  background: linear-gradient(to bottom, transparent, var(--bg-dark));
+}
+
+@media (max-width: 768px) {
+  .section-divider {
+    height: 60px;
+  }
 }
 
 .section-dark {

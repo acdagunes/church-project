@@ -231,50 +231,11 @@
     background: transparent;
 }
 
-.parish-link-btn:hover {
-    background: var(--primary) !important;
-    color: white !important;
-    box-shadow: 0 4px 15px rgba(184, 158, 101, 0.4);
-    transform: translateY(-2px);
-}
-
-/* Section Dividers */
-.section-divider {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    z-index: 5;
-    pointer-events: none;
-}
-
-.divider-top {
-    top: -1px;
-}
-
-.divider-bottom {
-    bottom: -1px;
-}
-
-.divider-fill-parchment {
-    fill: var(--parchment-bg);
-}
-
-.divider-fill-white {
-    fill: white;
-}
-
-.divider-fill-dark {
-    fill: var(--primary-dark);
-}
-
-.divider-fill-primary {
-    fill: var(--primary);
-}
-
 @media (max-width: 768px) {
-    .section-divider {
-        height: 50px;
+    .parish-link-btn {
+        margin: 10px 0;
+        justify-content: center;
+        width: 100%;
     }
 }
 
