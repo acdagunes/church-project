@@ -9,7 +9,8 @@
     background-image: url('../assets/church-hero.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: scroll;
+    /* Changed from fixed for better mobile feel */
     overflow: hidden;
 }
 
@@ -288,15 +289,13 @@
 }
 
 /* Foundation Video Section Styling */
-.foundation-video {
-    position: relative;
-    height: 60vh;
-    min-height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+color: white;
+background: var(--bg-dark);
+/* Ensure no gap color */
 }
 
 .video-background {

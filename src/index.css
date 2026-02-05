@@ -283,54 +283,43 @@ a {
   /* Prevent horizontal scroll from inner animations */
 }
 
-/* Section Dividers & Cinematic Transitions */
-.section-divider {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 150px;
-  /* Taller for more gradual curve */
-  z-index: 10;
-  pointer-events: none;
-}
-
-.divider-top {
-  top: -2px;
-}
-
-.divider-bottom {
-  bottom: -2px;
-}
-
-.divider-fill-parchment {
-  fill: var(--parchment-bg);
-}
-
-.divider-fill-white {
-  fill: white;
-}
-
-.divider-fill-dark {
-  fill: var(--bg-dark);
-}
-
-.divider-fill-primary {
-  fill: var(--primary);
-}
-
-/* Cinematic Fade Utility */
+/* Atmospheric Blending & Cinematic Transitions */
 .cinematic-fade-bottom {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 30%;
+  height: 250px;
   background: linear-gradient(to bottom, transparent, var(--parchment-bg));
   z-index: 4;
+  pointer-events: none;
 }
 
-.divider-dark-fade .cinematic-fade-bottom {
-  background: linear-gradient(to bottom, transparent, var(--bg-dark));
+.cinematic-fade-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 250px;
+  background: linear-gradient(to top, transparent, var(--parchment-bg));
+  z-index: 4;
+  pointer-events: none;
+}
+
+.blend-to-dark {
+  background: linear-gradient(to bottom, var(--parchment-bg) 0%, var(--bg-dark) 100%);
+  height: 200px;
+  margin-top: -100px;
+  position: relative;
+  z-index: 5;
+}
+
+.blend-from-dark {
+  background: linear-gradient(to top, var(--parchment-bg) 0%, var(--bg-dark) 100%);
+  height: 200px;
+  margin-bottom: -100px;
+  position: relative;
+  z-index: 5;
 }
 
 @media (max-width: 768px) {
