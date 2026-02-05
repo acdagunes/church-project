@@ -26,7 +26,7 @@ app.use('/api/content', require('./routes/content'));
 app.use('/api/parish', require('./routes/parish'));
 
 // Catch-all route to serve the React app
-app.get('(.*)', (req, res) => {
+app.get(/^(?!\/api|\/uploads).*/, (req, res) => {
   if (!req.path.startsWith('/api') && !req.path.startsWith('/uploads')) {
     res.sendFile(path.join(__dirname, '../dist/index.html'));
   }
