@@ -8,11 +8,12 @@ const authMiddleware = (req, res, next) => {
             return res.status(401).json({ message: 'No authentication token, access denied' });
         }
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback_secret');
         req.user = decoded;
         next();
     } catch (error) {
-        res.status(401).json({ message: 'Token is not valid' });
+        console.error('Authentication error:', error);
+        res.status(401).json({ message: 'Token is not valid', error: error.message });
     }
 };
 

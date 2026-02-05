@@ -246,7 +246,10 @@ router.post('/appointments', authMiddleware, async (req, res) => {
         res.status(201).json(appointment);
     } catch (error) {
         console.error('Booking error:', error);
-        res.status(500).json({ message: 'Server error booking appointment' });
+        res.status(500).json({
+            message: 'Server error booking appointment',
+            details: error.message
+        });
     }
 });
 
