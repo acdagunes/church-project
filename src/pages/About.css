@@ -19,7 +19,8 @@
     height: auto;
     transform: translate(-50%, -50%);
     object-fit: cover;
-    filter: brightness(0.85) contrast(1.1);
+    filter: brightness(0.9) saturate(1.1);
+    /* Slightly more vibrant and less contrasted */
 }
 
 .about-hero-overlay {
@@ -29,8 +30,9 @@
     right: 0;
     bottom: 0;
     background: linear-gradient(to bottom,
-            rgba(30, 39, 46, 0.4) 0%,
-            rgba(30, 39, 46, 0.8) 100%);
+            rgba(30, 39, 46, 0.3) 0%,
+            rgba(30, 39, 46, 0.7) 100%);
+    /* Lighter overlay */
     z-index: 1;
 }
 
@@ -251,26 +253,31 @@
     }
 
     .rector-bio-images {
-        flex-direction: column;
-        align-items: center;
+        display: flex;
+        flex-direction: row;
+        /* Show both photos side-by-side */
+        justify-content: center;
+        gap: var(--spacing-sm);
         max-width: 100%;
-        padding-bottom: 0;
+        padding-bottom: 20px;
     }
 
     .rector-photo-frame {
-        width: 100%;
-        max-width: 320px;
-        margin: 0 auto;
+        flex: 1;
+        max-width: 200px;
+        /* Smaller frames to fit two */
         border-width: 4px;
+        box-shadow: var(--shadow-md);
     }
 
     .secondary-photo {
-        display: none;
-        /* Hide secondary photo on mobile to save space and avoid clutter */
+        display: block;
+        /* Restore visibility */
+        transform: translateY(20px);
     }
 
     .bio-details {
-        padding: 0 1.5rem;
+        padding: 0 1rem;
     }
 
     .bio-timeline li {
@@ -289,7 +296,7 @@
         flex-direction: column;
         gap: 1rem;
         align-items: center;
-        padding: 0 1.5rem;
+        padding: 0 1rem;
     }
 
     .bio-actions .btn {
