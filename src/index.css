@@ -291,7 +291,8 @@ a {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 250px;
+  height: 150px;
+  /* Reduced from 250px */
   background: linear-gradient(to bottom, transparent, var(--parchment-bg));
   z-index: 4;
   pointer-events: none;
@@ -302,26 +303,20 @@ a {
   top: 0;
   left: 0;
   right: 0;
-  height: 250px;
+  height: 150px;
+  /* Reduced from 250px */
   background: linear-gradient(to top, transparent, var(--parchment-bg));
   z-index: 4;
   pointer-events: none;
 }
 
-.blend-to-dark {
-  background: linear-gradient(to bottom, var(--parchment-bg) 0%, var(--bg-dark) 100%);
-  height: 200px;
-  margin-top: -100px;
-  position: relative;
-  z-index: 5;
+/* Variant for blending into Dark sections */
+.cinematic-fade-bottom.to-dark {
+  background: linear-gradient(to bottom, transparent, var(--bg-dark));
 }
 
-.blend-from-dark {
-  background: linear-gradient(to top, var(--parchment-bg) 0%, var(--bg-dark) 100%);
-  height: 200px;
-  margin-bottom: -100px;
-  position: relative;
-  z-index: 5;
+.cinematic-fade-top.from-dark {
+  background: linear-gradient(to top, transparent, var(--bg-dark));
 }
 
 @media (max-width: 768px) {

@@ -107,8 +107,11 @@ const Home = () => {
                 </video>
                 <div className="video-overlay"></div>
 
-                {/* Cinematic Fade for Video */}
-                <div className="cinematic-fade-bottom"></div>
+                {/* Fade from Parchment (above) into Video */}
+                <div className="cinematic-fade-top"></div>
+
+                {/* Fade from Video into Dark Section (below) */}
+                <div className="cinematic-fade-bottom to-dark"></div>
 
                 <div className="container foundation-content">
                     <div className="content-box fade-in">
