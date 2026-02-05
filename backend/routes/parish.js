@@ -198,6 +198,9 @@ router.get('/appointments/all', authMiddleware, adminMiddleware, async (req, res
 router.post('/appointments', authMiddleware, async (req, res) => {
     try {
         const { type, dateTime, notes } = req.body;
+        console.log('Received booking request:', { type, dateTime, notes }); // Debug log
+
+        const safeType = type ? type.trim() : 'other';
         const start = new Date(dateTime);
 
         if (isNaN(start.getTime())) {
@@ -237,7 +240,7 @@ router.post('/appointments', authMiddleware, async (req, res) => {
 
         const appointment = new Appointment({
             member: req.user.id,
-            type,
+            type: safeType,
             dateTime,
             notes
         });
